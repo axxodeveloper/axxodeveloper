@@ -21,7 +21,7 @@
 <h2 align="center">Languages Known 💻</h2>
 
 <div align="center">
-  <img src="https://skillicons.dev/icons?i=js,ts,react,nextjs,nodejs,python,docker,aws,git,vscode&perline=7&theme=dark" />
+  <img src="https://skillicons.dev/icons?i=js,ts,react,nextjs,nodejs,python,docker,aws,git,vscode,linux,ai,php,swift,rust,go,css,java,figma&perline=7&theme=dark" />
 </div>
 
 <br/>
