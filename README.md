@@ -40,9 +40,10 @@
 
 <h2 align="center">Connect with Me 🤝</h2>
 
-<div align="center">
-  [![GitHub](https://img.shields.io/badge/GitHub-100000?style=flat&logo=github&logoColor=white)](https://github.com/axxodeveloper) [![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=flat&logo=instagram&logoColor=white)](https://instagram.com/axxo.developer) [![Email](https://img.shields.io/badge/Email-D14836?style=flat&logo=gmail&logoColor=white)](mailto:axxo.vibecoder@gmail.com)
-</div>
+<p align="center">  
+<a href="https://codepen.io/https://codepen.io/axxodeveloper" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/codepen.svg" alt="https://codepen.io/axxodeveloper" height="30" width="40" /></a>  
+<a href="https://instagram.com/https://www.instagram.com/axxo.developer" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="https://www.instagram.com/axxo.developer" height="30" width="40" /></a>  
+</p>  
 
 <div align="center">
   <img src="https://github-profile-maker.vercel.app/api/capsule?type=waving&color=36BCF7&colorEnd=6B5DD3&height=120&section=footer&text=Follow+to+get+notified+%21&fontSize=24&fontColor=ffffff&animation=pulse&gradientDirection=horizontal&parallax=true&wavePosition=70&waveAmplitude=20&waveSpeed=10&flipWave=true&textAlignX=50&textAlignY=66" />
