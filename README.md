@@ -13,7 +13,9 @@
 
 <h2 align="center">About Me 🔰</h2>
 
-<p align="center">I'm a tech enthusiast, aspiring Red Team Cybersecurity Professional based in Sri Lanka.</p>
+<p align="left">I am Althaf, A technology enthusiast from Sri Lanka (🇱🇰), bridging the gap between innovative web design and offensive cybersecurity. My world revolves around the code that builds the web and the techniques that secure it.</p>
+
+<p align="left">I don't just build full-stack applications; I engineer them. My passion lies in solving real-world challenges by creating everything from dynamic, user-centric websites to robust remote system management software. When I’m not deep in development, I’m actively sharpening my edge in Red Team operations, penetration testing, and reverse engineering. I thrive on pushing the boundaries of what’s possible, constantly exploring the potential of automation and AI to build a smarter, more secure digital future.</p>
 
 <br/>
 
