@@ -46,6 +46,14 @@
 <a href="https://codepen.io/https://codepen.io/axxodeveloper" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/codepen.svg" alt="https://codepen.io/axxodeveloper" height="30" width="40" /></a>  
 <a href="https://instagram.com/https://www.instagram.com/axxo.developer" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="https://www.instagram.com/axxo.developer" height="30" width="40" /></a>  
 </p>  
+<br>
+<br>
+
+> "Every bug fixed is another lesson mastered."
+> <div align="right">— Axxo</div>
+
+<br>
+<br>
 
 <div align="center">
   <img src="https://github-profile-maker.vercel.app/api/capsule?type=waving&color=36BCF7&colorEnd=6B5DD3&height=120&section=footer&text=Follow+to+get+notified+%21&fontSize=24&fontColor=ffffff&animation=pulse&gradientDirection=horizontal&parallax=true&wavePosition=70&waveAmplitude=20&waveSpeed=10&flipWave=true&textAlignX=50&textAlignY=66" />
