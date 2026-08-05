@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github-profile-maker.vercel.app/api/capsule?type=waving&color=36BCF7&colorEnd=6B5DD3&height=200&section=header&text=Welcome+to+my+Kingdom&fontSize=30&fontColor=ffffff&animation=pulse&gradientDirection=horizontal&parallax=true&wavePosition=70&waveAmplitude=20&waveSpeed=10&flipWave=true&textAlignX=50&textAlignY=33&rtl=24&rtr=24&rbr=0&rbl=0" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0%3A0B192C%2C50%3A1E3E62%2C100%3A82DAFF&height=200&section=header&text=Leader%20of%20%E2%80%8E%20%E2%80%8E%22The%20Null%22&fontSize=50&animation=fadeIn&fontColor=ffffff" />
 </div>
 
 <h1 align="center">Hi there, I'm AXXO!  👋</h1>
@@ -56,5 +56,5 @@
 <br>
 
 <div align="center">
-  <img src="https://github-profile-maker.vercel.app/api/capsule?type=waving&color=36BCF7&colorEnd=6B5DD3&height=120&section=footer&text=Follow+to+get+notified+%21&fontSize=24&fontColor=ffffff&animation=pulse&gradientDirection=horizontal&parallax=true&wavePosition=70&waveAmplitude=20&waveSpeed=10&flipWave=true&textAlignX=50&textAlignY=66" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0%3A82DAFF%2C50%3A1E3E62%2C100%3A0B192C&height=200&section=footer&text=Follow%20on%20instagram%E2%80%8E%20!&fontSize=50&animation=fadeIn&fontColor=ffffff" />
 </div>
