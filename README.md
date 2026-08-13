@@ -37,7 +37,9 @@
 </div>
 
 <div align="center">
-  <img src="https://github-profile-maker.vercel.app/api/activity?username=axxodeveloper&theme=tokyonight&hide_border=false" alt="Activity Graph" />
+
+![Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=axxodeveloper&bg_color=00000000&color=58a6ff&line=58a6ff&point=58a6ff&area=true&hide_border=true&theme=dark)
+
 </div>
 
 <h2 align="center">Connect with Me 🤝</h2>
