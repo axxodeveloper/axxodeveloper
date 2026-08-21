@@ -2,7 +2,7 @@ name: Update README
 
 on:
   schedule:
-   - cron: '*/30 * * * *' 
+    - cron: '*/30 * * * *' 
   workflow_dispatch:
   push:
     branches:
@@ -24,7 +24,7 @@ jobs:
       - name: Update README.md
         env:
           METRICS_TOKEN: ${{ secrets.METRICS_TOKEN }}
-        run: python scripts/update_readme.py
+        run: python update_readme.py
           
       - name: Commit and Push changes
         run: |
