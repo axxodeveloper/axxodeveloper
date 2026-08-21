@@ -2,7 +2,7 @@ name: Update README
 
 on:
   schedule:
-    - cron: '*/30 * * * *' 
+    - cron: '30 2,10,18 * * *' 
   workflow_dispatch:
   push:
     branches:
@@ -14,18 +14,19 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
-        
+      - uses: actions/checkout@v6
+      
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.x'
           
       - name: Update README.md
         env:
-          METRICS_TOKEN: ${{ secrets.METRICS_TOKEN }}
-        run: python update_readme.py
-          
+          # Use your PAT or the default GH_TOKEN
+          GH_TOKEN: ${{ secrets.METRICS_TOKEN }}
+        run: python .github/scripts/update_readme.py
+        
       - name: Commit and Push changes
         run: |
           git config --global user.name 'github-actions[bot]'
