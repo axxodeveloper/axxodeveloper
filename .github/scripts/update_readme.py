@@ -562,15 +562,22 @@ def main():
     with open("github-metrics-light.svg", "w") as f:
         f.write(generate_svg("light", counts, dates))
 
-    # 7. Update README.md
+        # 7. Update README.md
     readme_content = """<picture>
   <source media="(prefers-color-scheme: dark)" srcset="github-metrics-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="github-metrics-light.svg">
   <img alt="GitHub Metrics Console" src="github-metrics-dark.svg" width="100%">
-</picture>"""
+</picture>
+
+<details>
+<summary><b>Profile Overview</b></summary>
+<br>
+I am Althaf (Axxo), a technology enthusiast from Sri Lanka (🇱🇰), bridging the gap between innovative web design and offensive cybersecurity. My world revolves around the code that builds the web and the techniques that secure it. I specialize in full-stack applications, red team operations, penetration testing, and automation.
+</details>"""
         
     with open("README.md", "w") as f:
         f.write(readme_content)
+
 
 if __name__ == "__main__":
     main()
