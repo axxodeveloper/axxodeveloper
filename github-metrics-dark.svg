@@ -1,4 +1,4 @@
-<svg width="100%" viewBox="0 0 650 778" xmlns="http://www.w3.org/2000/svg">
+<svg width="100%" viewBox="0 0 650 760" xmlns="http://www.w3.org/2000/svg">
 <style>
   .text { font-family: "Courier New", Courier, monospace; font-size: 12px; }
   .label { fill: #58a6ff; font-weight: bold; }
@@ -41,15 +41,14 @@
 <text x="20" y="552" xml:space="preserve"></text>
 <text x="20" y="570" xml:space="preserve"><tspan class="dots">.</tspan></text>
 <text x="20" y="588" xml:space="preserve"><tspan class="header">Last.24h -------------------------------------------------------------------------</tspan></text>
-<text x="20" y="606" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="label">Pushed: </tspan><tspan class="dots">.............................................</tspan><tspan class="value"> 6 commits to axxodeveloper</tspan></text>
+<text x="20" y="606" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="label">Pushed: </tspan><tspan class="dots">.............................................</tspan><tspan class="value"> 5 commits to axxodeveloper</tspan></text>
 <text x="20" y="624" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; [192ba57] Update README.md </tspan><tspan class="dots">......................</tspan><tspan class="muted"> axxodeveloper @ 10:44 IST</tspan></text>
 <text x="20" y="642" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; [728ea89] Update user configuration in user_co </tspan><tspan class="dots">..</tspan><tspan class="muted"> axxodeveloper @ 11:01 IST</tspan></text>
 <text x="20" y="660" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; [1000f90] Update update_readme.yml </tspan><tspan class="dots">..............</tspan><tspan class="muted"> axxodeveloper @ 10:34 IST</tspan></text>
 <text x="20" y="678" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; [405b2e9] Enhance README.md with profile detai </tspan><tspan class="dots">..</tspan><tspan class="muted"> axxodeveloper @ 10:53 IST</tspan></text>
 <text x="20" y="696" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; [8d6f791] Enhance README with profile overview </tspan><tspan class="dots">..</tspan><tspan class="muted"> axxodeveloper @ 10:49 IST</tspan></text>
-<text x="20" y="714" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; [1f3e714] Update update_readme.yml </tspan><tspan class="dots">..............</tspan><tspan class="muted"> axxodeveloper @ 23:22 IST</tspan></text>
-<text x="20" y="732" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="label">Starred: </tspan><tspan class="dots">.............................................................</tspan><tspan class="value"> 1 repo(s)</tspan></text>
-<text x="20" y="750" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; sample </tspan><tspan class="dots">........................................................</tspan><tspan class="muted"> @ 14:22 IST</tspan></text>
+<text x="20" y="714" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="label">Starred: </tspan><tspan class="dots">.............................................................</tspan><tspan class="value"> 1 repo(s)</tspan></text>
+<text x="20" y="732" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; sample </tspan><tspan class="dots">........................................................</tspan><tspan class="muted"> @ 14:22 IST</tspan></text>
 </g>
 <text x="35" y="471.0" fill="#8b949e" font-size="10" text-anchor="end" font-family="Courier New, Courier, monospace">30</text>
 <text x="35" y="491.0" fill="#8b949e" font-size="10" text-anchor="end" font-family="Courier New, Courier, monospace">24</text>
