@@ -1,4 +1,4 @@
-<svg width="100%" viewBox="0 0 650 1084" xmlns="http://www.w3.org/2000/svg">
+<svg width="100%" viewBox="0 0 650 940" xmlns="http://www.w3.org/2000/svg">
 <style>
   .text { font-family: "Courier New", Courier, monospace; font-size: 12px; }
   .label { fill: #58a6ff; font-weight: bold; }
@@ -41,7 +41,7 @@
 <text x="20" y="552" xml:space="preserve"></text>
 <text x="20" y="570" xml:space="preserve"><tspan class="dots">.</tspan></text>
 <text x="20" y="588" xml:space="preserve"><tspan class="header">Last.24h -------------------------------------------------------------------------</tspan></text>
-<text x="20" y="606" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="label">Pushed: </tspan><tspan class="dots">...........................................</tspan><tspan class="value"> 21 commits to 4 repositories</tspan></text>
+<text x="20" y="606" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="label">Pushed: </tspan><tspan class="dots">............................................</tspan><tspan class="value"> 15 commits to axxodeveloper</tspan></text>
 <text x="20" y="624" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; [192ba57] Update README.md </tspan><tspan class="dots">......................</tspan><tspan class="muted"> axxodeveloper @ 10:44 IST</tspan></text>
 <text x="20" y="642" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; [728ea89] Update user configuration in user_co </tspan><tspan class="dots">..</tspan><tspan class="muted"> axxodeveloper @ 11:01 IST</tspan></text>
 <text x="20" y="660" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; [1000f90] Update update_readme.yml </tspan><tspan class="dots">..............</tspan><tspan class="muted"> axxodeveloper @ 10:34 IST</tspan></text>
@@ -51,22 +51,14 @@
 <text x="20" y="732" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; [ba3ae31] Create components.py </tspan><tspan class="dots">..................</tspan><tspan class="muted"> axxodeveloper @ 22:34 IST</tspan></text>
 <text x="20" y="750" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; [bad3793] Update update_readme.yml </tspan><tspan class="dots">..............</tspan><tspan class="muted"> axxodeveloper @ 23:01 IST</tspan></text>
 <text x="20" y="768" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; [1f3e714] Update update_readme.yml </tspan><tspan class="dots">..............</tspan><tspan class="muted"> axxodeveloper @ 23:22 IST</tspan></text>
-<text x="20" y="786" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; [2d221ce] Merge pull request #2 from axxodeveloper/axxo </tspan><tspan class="dots">..</tspan><tspan class="muted"> C1ZX @ 21:47 IST</tspan></text>
-<text x="20" y="804" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; [7dd90ed] Update README.md </tspan><tspan class="dots">......................</tspan><tspan class="muted"> axxodeveloper @ 22:31 IST</tspan></text>
-<text x="20" y="822" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; [231eead] Update update_readme.yml </tspan><tspan class="dots">..............</tspan><tspan class="muted"> axxodeveloper @ 22:54 IST</tspan></text>
-<text x="20" y="840" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; [e795ef1] Merge pull request #1 from axxodevelope </tspan><tspan class="dots">..</tspan><tspan class="muted"> Axxo.Vault @ 22:05 IST</tspan></text>
-<text x="20" y="858" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; [92c2cd8] Updated README_APK.md </tspan><tspan class="dots">....................</tspan><tspan class="muted"> Axxo.Vault @ 22:04 IST</tspan></text>
-<text x="20" y="876" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; [e6bbfa3] Create update_readme.py </tspan><tspan class="dots">...............</tspan><tspan class="muted"> axxodeveloper @ 22:34 IST</tspan></text>
-<text x="20" y="894" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; [160401c] Merge pull request #4 from axxodeveloper/axxo </tspan><tspan class="dots">..</tspan><tspan class="muted"> C1ZX @ 21:49 IST</tspan></text>
-<text x="20" y="912" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; [c4ac716] Merge pull request #3 from axxodeveloper/axxo </tspan><tspan class="dots">..</tspan><tspan class="muted"> C1ZX @ 21:48 IST</tspan></text>
-<text x="20" y="930" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; [971c523] Add workflow to update README automa </tspan><tspan class="dots">..</tspan><tspan class="muted"> axxodeveloper @ 22:39 IST</tspan></text>
-<text x="20" y="948" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; [3f99121] Create user_config.py </tspan><tspan class="dots">.................</tspan><tspan class="muted"> axxodeveloper @ 22:38 IST</tspan></text>
-<text x="20" y="966" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; [242703a] Add files via upload </tspan><tspan class="dots">..................</tspan><tspan class="muted"> axxodeveloper @ 22:32 IST</tspan></text>
-<text x="20" y="984" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; [c877983] Merge pull request #2 from axxodevelo </tspan><tspan class="dots">..</tspan><tspan class="muted"> Site-Checker @ 21:56 IST</tspan></text>
-<text x="20" y="1002" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="label">Pull.Requests: </tspan><tspan class="dots">...............................................</tspan><tspan class="value"> Worked on 1 PR(s)</tspan></text>
-<text x="20" y="1020" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; [Opened] #1 Pull Request </tspan><tspan class="dots">...........................</tspan><tspan class="muted"> Axxo.Vault @ 22:05 IST</tspan></text>
-<text x="20" y="1038" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="label">Starred: </tspan><tspan class="dots">.............................................................</tspan><tspan class="value"> 1 repo(s)</tspan></text>
-<text x="20" y="1056" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; sample </tspan><tspan class="dots">........................................................</tspan><tspan class="muted"> @ 14:22 IST</tspan></text>
+<text x="20" y="786" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; [7dd90ed] Update README.md </tspan><tspan class="dots">......................</tspan><tspan class="muted"> axxodeveloper @ 22:31 IST</tspan></text>
+<text x="20" y="804" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; [231eead] Update update_readme.yml </tspan><tspan class="dots">..............</tspan><tspan class="muted"> axxodeveloper @ 22:54 IST</tspan></text>
+<text x="20" y="822" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; [e6bbfa3] Create update_readme.py </tspan><tspan class="dots">...............</tspan><tspan class="muted"> axxodeveloper @ 22:34 IST</tspan></text>
+<text x="20" y="840" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; [971c523] Add workflow to update README automa </tspan><tspan class="dots">..</tspan><tspan class="muted"> axxodeveloper @ 22:39 IST</tspan></text>
+<text x="20" y="858" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; [3f99121] Create user_config.py </tspan><tspan class="dots">.................</tspan><tspan class="muted"> axxodeveloper @ 22:38 IST</tspan></text>
+<text x="20" y="876" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; [242703a] Add files via upload </tspan><tspan class="dots">..................</tspan><tspan class="muted"> axxodeveloper @ 22:32 IST</tspan></text>
+<text x="20" y="894" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="label">Starred: </tspan><tspan class="dots">.............................................................</tspan><tspan class="value"> 1 repo(s)</tspan></text>
+<text x="20" y="912" xml:space="preserve"><tspan class="dots">. </tspan><tspan class="muted">   &gt; sample </tspan><tspan class="dots">........................................................</tspan><tspan class="muted"> @ 14:22 IST</tspan></text>
 </g>
 <text x="35" y="471.0" fill="#8b949e" font-size="10" text-anchor="end" font-family="Courier New, Courier, monospace">30</text>
 <text x="35" y="491.0" fill="#8b949e" font-size="10" text-anchor="end" font-family="Courier New, Courier, monospace">24</text>
