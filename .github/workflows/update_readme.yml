@@ -32,4 +32,5 @@ jobs:
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add README.md github-metrics-dark.svg github-metrics-light.svg
           git commit -m 'chore: dynamically update README stats and SVG' || echo "No changes to commit"
+          git pull origin main --rebase || echo "No remote changes to pull"
           git push
