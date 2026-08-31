@@ -27,15 +27,13 @@ def fetch_tryhackme_stats():
     url = "https://tryhackme.com/api/v2/badges/public-profile?user=alto.hacked"
     try:
         data = fetch_json(url)
-        # Handle API v2 response wrapper safely
-        user_data = data.get("data", data)
-        rank = user_data.get("rank", "13163")
-        rooms = user_data.get("completedRoomsCount", 207)
-        points = user_data.get("points", 108146)
-        return str(rank), str(rooms), f"{points:,}" if isinstance(points, int) else str(points)
+        # TryHackMe API v2 returns user rank & points inside the root or data
+        rank = data.get("rank", "N/A")
+        points = data.get("points", 0)
+        return str(rank), f"{points:,}" if isinstance(points, int) else str(points)
     except Exception as e:
         print(f"Error fetching TryHackMe stats: {e}")
-        return "13163", "207", "108,146"
+        return "N/A", "0"
 
 def main():
     token = os.environ.get("METRICS_TOKEN")
@@ -50,8 +48,8 @@ def main():
         print("Error: GITHUB_REPOSITORY environment variable not found.")
         return
     
-    # Fetch live TryHackMe stats
-    thm_rank, thm_rooms, thm_points = fetch_tryhackme_stats()
+    # Fetch TryHackMe stats
+    thm_rank, thm_points = fetch_tryhackme_stats()
     
     # 1. User Data
     try:
@@ -188,7 +186,7 @@ def main():
     except Exception:
         pass
         
-    # 3. Repos
+    # 3. Repos (for stars, LOC and repo count)
     repos = []
     page = 1
     while True:
@@ -226,7 +224,7 @@ def main():
         except Exception:
             pass
             
-    # 4. Commits & PRs via GraphQL
+    # 4. Commits & PRs & Contributed (via GraphQL)
     query = """
     {
       user(login: "%s") {
@@ -334,8 +332,7 @@ def main():
         if section.type == "value":
             lines.append(pad_line(section.key, section.value))
         elif section.type == "tryhackme":
-            # Dynamically display live rank & rooms count
-            lines.append(pad_double("THM.Rank", thm_rank, "THM.Rooms", thm_rooms))
+            lines.append(pad_double("THM.Rank", thm_rank, "THM.Points", thm_points))
         elif section.type == "time_elapsed":
             elapsed_str = calculate_time_elapsed(section.year, section.month, section.day)
             lines.append(pad_line(section.key, elapsed_str))
@@ -472,7 +469,7 @@ def main():
     with open("github-metrics-light.svg", "w") as f:
         f.write(generate_svg("light", counts, dates))
 
-    # 7. Update README.md with custom clean shields.io badge that reflects your Gold tier / rooms
+    # 7. Update README.md with small TryHackMe badge at bottom of details view
     readme_content = """<picture>
   <source media="(prefers-color-scheme: dark)" srcset="github-metrics-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="github-metrics-light.svg">
@@ -482,11 +479,11 @@ def main():
 <details>
 <summary><b>Profile Overview</b></summary>
 <br>
-I am Althaf (Axxo), a technology enthusiast from Sri Lanka (🇱🇰), bridging the gap between innovative web design and offensive cybersecurity. My world revolves around the code that builds the web and the techniques that secure it. My core focus spans full-stack applications, red team operations, penetration testing, and systems automation. Check my Linkedin Profile - https://www.linkedin.com/in/axxo
+I am Althaf (Axxo), a technology enthusiast from Sri Lanka (🇱🇰), bridging the gap between innovative web design and offensive cybersecurity. My world revolves around the code that builds the web and the techniques that secure it. I specialize in full-stack applications, red team operations, penetration testing, and automation. Check my LinkedIn profile - https://www.linkedin.com/in/axxo 
 
 <br><br>
 <a href="https://tryhackme.com/p/alto.hacked">
-  <img src="https://img.shields.io/badge/TryHackMe-Gold_%E2%80%A2_13,163_Rank_%E2%80%A2_207_Rooms-1f425f?style=flat&logo=tryhackme&logoColor=white" alt="TryHackMe Badge">
+  <img src="https://tryhackme-badges.s3.amazonaws.com/alto.hacked.png" alt="TryHackMe Badge" height="65">
 </a>
 </details>"""
         
