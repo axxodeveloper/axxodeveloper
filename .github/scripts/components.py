@@ -74,3 +74,6 @@ class Last24Hr(BaseComponent):
         self.type = "last_24_hr"
         self.events = args
         self.register()
+
+class TryHackMeComponent:
+    type = "tryhackme"
