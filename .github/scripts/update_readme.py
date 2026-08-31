@@ -7,10 +7,11 @@ import re
 import user_config
 import components
 
-def fetch_json(url, token):
+def fetch_json(url, token=None):
     req = urllib.request.Request(url)
     if token:
         req.add_header("Authorization", f"token {token}")
+    req.add_header("User-Agent", "Mozilla/5.0")
     with urllib.request.urlopen(req) as response:
         return json.loads(response.read())
 
@@ -22,6 +23,18 @@ def fetch_graphql(query, token):
     with urllib.request.urlopen(req, data=data) as response:
         return json.loads(response.read())
 
+def fetch_tryhackme_stats():
+    url = "https://tryhackme.com/api/v2/badges/public-profile?user=alto.hacked"
+    try:
+        data = fetch_json(url)
+        # TryHackMe API v2 returns user rank & points inside the root or data
+        rank = data.get("rank", "N/A")
+        points = data.get("points", 0)
+        return str(rank), f"{points:,}" if isinstance(points, int) else str(points)
+    except Exception as e:
+        print(f"Error fetching TryHackMe stats: {e}")
+        return "N/A", "0"
+
 def main():
     token = os.environ.get("METRICS_TOKEN")
     if not token:
@@ -32,8 +45,11 @@ def main():
     if repo_env and "/" in repo_env:
         username = repo_env.split("/")[0]
     else:
-        print("Error: GITHUB_REPOSITORY environment variable not found. Please run this script inside GitHub Actions or export GITHUB_REPOSITORY='your_username/repo'.")
+        print("Error: GITHUB_REPOSITORY environment variable not found.")
         return
+    
+    # Fetch TryHackMe stats
+    thm_rank, thm_points = fetch_tryhackme_stats()
     
     # 1. User Data
     try:
@@ -169,7 +185,7 @@ def main():
                 recent_reviews.append((state, r_name, time_str))
     except Exception:
         pass
-    
+        
     # 3. Repos (for stars, LOC and repo count)
     repos = []
     page = 1
@@ -208,7 +224,7 @@ def main():
         except Exception:
             pass
             
-    # 3. Commits & PRs & Contributed (via GraphQL)
+    # 4. Commits & PRs & Contributed (via GraphQL)
     query = """
     {
       user(login: "%s") {
@@ -252,7 +268,6 @@ def main():
         counts = []
         dates = []
 
-    # 4. Date
     today = date.today()
     current_date_str = today.strftime("%B %d, %Y")
     
@@ -274,7 +289,6 @@ def main():
     def fmt(n):
         return f"{n:,}" if isinstance(n, int) else str(n)
 
-    # 6. Format Lines Dynamically
     TOTAL_WIDTH = 82
 
     def esc(s):
@@ -310,28 +324,20 @@ def main():
         dashes = "-" * max(1, TOTAL_WIDTH - len(base) - len(right))
         return f'<tspan class="header">{esc(base)}{dashes}{esc(right)}</tspan>'
 
-    def pad_activity(label, sparkline_str):
-        left = f". {label}: "
-        right = f" [{sparkline_str}]"
-        dots = "." * max(1, (TOTAL_WIDTH - len(left) - len(right)))
-        return f'<tspan class="dots">. </tspan><tspan class="label">{esc(label)}: </tspan><tspan class="dots">{dots} [</tspan><tspan class="header" dominant-baseline="text-after-edge">{esc(sparkline_str)}</tspan><tspan class="dots">]</tspan>'
-
     lines = []
-
     graph_start_line_index = -1
     last_24_events = []
 
     for section in components.REGISTERED_COMPONENTS:
         if section.type == "value":
             lines.append(pad_line(section.key, section.value))
-            
+        elif section.type == "tryhackme":
+            lines.append(pad_double("THM.Rank", thm_rank, "THM.Points", thm_points))
         elif section.type == "time_elapsed":
             elapsed_str = calculate_time_elapsed(section.year, section.month, section.day)
             lines.append(pad_line(section.key, elapsed_str))
-            
         elif section.type == "separator":
             lines.append('<tspan class="dots">.</tspan>')
-            
         elif section.type == "heading":
             if section.right_text is not None:
                 if getattr(section.right_text, "type", None) == "current_date":
@@ -340,10 +346,8 @@ def main():
                     lines.append(make_header(section.title, str(section.right_text)))
             else:
                 lines.append(make_header(section.title))
-            
         elif section.type == "working_on":
             lines.append(pad_line("Working.on", working_on))
-                
         elif section.type == "github_stats":
             lines.append(make_header("GitHub-Stats"))
             stat_map = {
@@ -354,7 +358,6 @@ def main():
                 "Pull.Requests": fmt(prs),
                 "Lines.of.Code": f"~{fmt(total_loc)}"
             }
-            
             for i in range(0, len(section.stats), 2):
                 key1 = section.stats[i]
                 val1 = stat_map.get(key1, "N/A")
@@ -364,13 +367,11 @@ def main():
                     lines.append(pad_double(key1, val1, key2, val2))
                 else:
                     lines.append(pad_line(key1, val1))
-                    
         elif section.type == "commit_graph":
             lines.append(make_header("Commit.graph"))
             graph_start_line_index = len(lines)
             if counts:
                 lines.extend([""] * 6)
-                    
         elif section.type == "last_24_hr":
             last_24_events = section.events
 
@@ -378,13 +379,11 @@ def main():
     if has_activity and len(last_24_events) > 0:
         lines.append('<tspan class="dots">.</tspan>')
         lines.append(make_header("Last.24h"))
-        
         if "Pushes" in last_24_events and today_commits > 0:
             repos_str = ", ".join(today_repos)
             if len(repos_str) > 40:
                 repos_str = f"{len(today_repos)} repositories"
             lines.append(pad_line("Pushed", f"{today_commits} commits to {repos_str}"))
-            
             for sha, msg, repo, tstr in recent_activity:
                 right_part = f" {repo} @ {tstr}"
                 avail_msg = TOTAL_WIDTH - len(f".    > [{sha}] ") - len(right_part) - 3
@@ -392,91 +391,7 @@ def main():
                     msg = msg[:max(0, avail_msg)]
                 left_for_calc = f".    > [{sha}] {msg} "
                 dots = "." * max(1, TOTAL_WIDTH - len(left_for_calc) - len(right_part))
-                rendered_left = f"   > [{sha}] {msg} "
-                lines.append(f'<tspan class="dots">. </tspan><tspan class="muted">{esc(rendered_left)}</tspan><tspan class="dots">{dots}</tspan><tspan class="muted">{esc(right_part)}</tspan>')
-                
-        if "Pull.Requests" in last_24_events and today_prs > 0:
-            lines.append(pad_line("Pull.Requests", f"Worked on {today_prs} PR(s)"))
-            for action, pr_num, pr_title, repo, tstr in recent_prs:
-                right_part = f" {repo} @ {tstr}"
-                prefix = f".    > [{action}] {pr_num} "
-                avail_msg = TOTAL_WIDTH - len(prefix) - len(right_part) - 3
-                title = pr_title
-                if len(title) > avail_msg:
-                    title = title[:max(0, avail_msg)]
-                left_for_calc = f"{prefix}{title} "
-                dots = "." * max(1, TOTAL_WIDTH - len(left_for_calc) - len(right_part))
-                rendered_left = f"   > [{action}] {pr_num} {title} "
-                lines.append(f'<tspan class="dots">. </tspan><tspan class="muted">{esc(rendered_left)}</tspan><tspan class="dots">{dots}</tspan><tspan class="muted">{esc(right_part)}</tspan>')
-                
-        if "Issues" in last_24_events and today_issues > 0:
-            lines.append(pad_line("Issues", f"Worked on {today_issues} issue(s)"))
-            for action, issue_num, issue_title, repo, tstr in recent_issues:
-                right_part = f" {repo} @ {tstr}"
-                prefix = f".    > [{action}] {issue_num} "
-                avail_msg = TOTAL_WIDTH - len(prefix) - len(right_part) - 3
-                title = issue_title
-                if len(title) > avail_msg:
-                    title = title[:max(0, avail_msg)]
-                left_for_calc = f"{prefix}{title} "
-                dots = "." * max(1, TOTAL_WIDTH - len(left_for_calc) - len(right_part))
-                rendered_left = f"   > [{action}] {issue_num} {title} "
-                lines.append(f'<tspan class="dots">. </tspan><tspan class="muted">{esc(rendered_left)}</tspan><tspan class="dots">{dots}</tspan><tspan class="muted">{esc(right_part)}</tspan>')
-                
-        if "Starred" in last_24_events and today_stars > 0:
-            lines.append(pad_line("Starred", f"{today_stars} repo(s)"))
-            for repo, tstr in recent_stars:
-                right_part = f" @ {tstr}"
-                prefix = f".    > "
-                left_for_calc = f"{prefix}{repo} "
-                dots = "." * max(1, TOTAL_WIDTH - len(left_for_calc) - len(right_part))
-                rendered_left = f"   > {repo} "
-                lines.append(f'<tspan class="dots">. </tspan><tspan class="muted">{esc(rendered_left)}</tspan><tspan class="dots">{dots}</tspan><tspan class="muted">{esc(right_part)}</tspan>')
-                
-        if "Forked" in last_24_events and today_forks > 0:
-            lines.append(pad_line("Forked", f"{today_forks} repo(s)"))
-            for repo, tstr in recent_forks:
-                right_part = f" @ {tstr}"
-                prefix = f".    > "
-                left_for_calc = f"{prefix}{repo} "
-                dots = "." * max(1, TOTAL_WIDTH - len(left_for_calc) - len(right_part))
-                rendered_left = f"   > {repo} "
-                lines.append(f'<tspan class="dots">. </tspan><tspan class="muted">{esc(rendered_left)}</tspan><tspan class="dots">{dots}</tspan><tspan class="muted">{esc(right_part)}</tspan>')
-                
-        if "Releases" in last_24_events and today_releases > 0:
-            lines.append(pad_line("Releases", f"Published {today_releases} release(s)"))
-            for tag, repo, tstr in recent_releases:
-                right_part = f" {repo} @ {tstr}"
-                prefix = f".    > "
-                avail_msg = TOTAL_WIDTH - len(prefix) - len(right_part) - 3
-                title = tag
-                if len(title) > avail_msg:
-                    title = title[:max(0, avail_msg)]
-                left_for_calc = f"{prefix}{title} "
-                dots = "." * max(1, TOTAL_WIDTH - len(left_for_calc) - len(right_part))
-                rendered_left = f"   > {title} "
-                lines.append(f'<tspan class="dots">. </tspan><tspan class="muted">{esc(rendered_left)}</tspan><tspan class="dots">{dots}</tspan><tspan class="muted">{esc(right_part)}</tspan>')
-
-        if "Reviewed" in last_24_events and today_reviews > 0:
-            lines.append(pad_line("Reviewed", f"{today_reviews} PR(s)"))
-            for state, repo, tstr in recent_reviews:
-                right_part = f" {repo} @ {tstr}"
-                prefix = f".    > "
-                title = f"[{state}] PR"
-                left_for_calc = f"{prefix}{title} "
-                dots = "." * max(1, TOTAL_WIDTH - len(left_for_calc) - len(right_part))
-                rendered_left = f"   > {title} "
-                lines.append(f'<tspan class="dots">. </tspan><tspan class="muted">{esc(rendered_left)}</tspan><tspan class="dots">{dots}</tspan><tspan class="muted">{esc(right_part)}</tspan>')
-
-        if "Comments" in last_24_events and today_comments > 0:
-            lines.append(pad_line("Comments", f"Made {today_comments} comment(s)"))
-            for repo, tstr in recent_comments:
-                right_part = f" {repo} @ {tstr}"
-                prefix = f".    > "
-                title = f"Commented"
-                left_for_calc = f"{prefix}{title} "
-                dots = "." * max(1, TOTAL_WIDTH - len(left_for_calc) - len(right_part))
-                rendered_left = f"   > {title} "
+                rendered_left = f"    > [{sha}] {msg} "
                 lines.append(f'<tspan class="dots">. </tspan><tspan class="muted">{esc(rendered_left)}</tspan><tspan class="dots">{dots}</tspan><tspan class="muted">{esc(right_part)}</tspan>')
 
     def generate_svg(theme, counts, dates):
@@ -488,13 +403,11 @@ def main():
         header_color = "#3fb950" if theme == "dark" else "#1a7f37"
         muted_color = "#8b949e" if theme == "dark" else "#57606a"
         line_color = "#3fb950" if theme == "dark" else "#1a7f37"
-        grid_color = "#30363d" if theme == "dark" else "#ebf0f4"
         
         graph_h = 100
         graph_w = 560
         x_start = 45
         y_start = 30 + graph_start_line_index * 18 + 5
-        
         height = 18 * len(lines) + 40
         
         svg = [
@@ -525,20 +438,17 @@ def main():
             if grid_max == 0:
                 grid_max = 5
                 
-            # Y-axis labels
             for i in range(6):
                 val = int(grid_max * (5 - i) / 5)
                 y = y_start + i * (graph_h / 5)
                 svg.append(f'<text x="{x_start - 10}" y="{y + 4}" fill="{muted_color}" font-size="10" text-anchor="end" font-family="Courier New, Courier, monospace">{val}</text>')
                 
-            # Points
             points = []
             for i, count in enumerate(counts):
                 x = x_start + i * (graph_w / (len(counts) - 1))
                 y = y_start + graph_h - (count / grid_max) * graph_h
                 points.append((x, y))
             
-            # Path
             d = f"M {points[0][0]} {points[0][1]}"
             for i in range(1, len(points)):
                 p0 = points[i-1]
@@ -547,22 +457,19 @@ def main():
                 d += f" C {cx} {p0[1]}, {cx} {p1[1]}, {p1[0]} {p1[1]}"
                 
             svg.append(f'<path d="{d}" fill="none" stroke="{line_color}" stroke-width="3" />')
-            
-            # Dots
             for p in points:
                 svg.append(f'<circle cx="{p[0]}" cy="{p[1]}" r="3" fill="{line_color}" stroke="{bg_color}" stroke-width="1.5" />')
 
         svg.append('</svg>')
         return "\n".join(svg)
 
-    # 6. Save SVGs
     with open("github-metrics-dark.svg", "w") as f:
         f.write(generate_svg("dark", counts, dates))
         
     with open("github-metrics-light.svg", "w") as f:
         f.write(generate_svg("light", counts, dates))
 
-        # 7. Update README.md
+    # 7. Update README.md with small TryHackMe badge at bottom of details view
     readme_content = """<picture>
   <source media="(prefers-color-scheme: dark)" srcset="github-metrics-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="github-metrics-light.svg">
@@ -573,11 +480,15 @@ def main():
 <summary><b>Profile Overview</b></summary>
 <br>
 I am Althaf (Axxo), a technology enthusiast from Sri Lanka (🇱🇰), bridging the gap between innovative web design and offensive cybersecurity. My world revolves around the code that builds the web and the techniques that secure it. I specialize in full-stack applications, red team operations, penetration testing, and automation.
+
+<br><br>
+<a href="https://tryhackme.com/p/alto.hacked">
+  <img src="https://tryhackme-badges.s3.amazonaws.com/alto.hacked.png" alt="TryHackMe Badge" height="65">
+</a>
 </details>"""
         
     with open("README.md", "w") as f:
         f.write(readme_content)
-
 
 if __name__ == "__main__":
     main()
